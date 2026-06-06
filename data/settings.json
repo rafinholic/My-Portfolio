@@ -1,0 +1,23 @@
+{
+  "name": "Ahmad Kamruzzaman",
+  "title": "Software Developer",
+  "bio": "Crafting digital systems, immersive web spatial interfaces, and tactile experimental prototypes at the intersection of aesthetic design and human factors.",
+  "aboutMe": "I am a creative technologist collaborating with global teams to design fluid digital environments. Over the past five years, I have shaped interfaces that bridge sensory experience and functional architecture, specializing in high-performance frontends, spatial interactions, and rich generative animations. My practice balances industrial design minimalism with cutting-edge web engineering.",
+  "skills": [
+    "TypeScript",
+    "React / Next.js",
+    "Three.js / WebGL",
+    "Tailwind CSS",
+    "Node.js",
+    "Interaction Design",
+    "Creative Coding",
+    "Performance Optimization"
+  ],
+  "socials": {
+    "github": "https://github.com/rafinholic",
+    "linkedin": "https://linkedin.com",
+    "twitter": "https://twitter.com",
+    "email": "ahmad.kamruzzaman043@gmaill.com"
+  },
+  "resumeUrl": "#"
+}
