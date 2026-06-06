@@ -1,0 +1,24 @@
+{
+  "name": "Ahmad Kamruzzaman",
+  "title": "Backend Developer & EEE Engineer",
+  "bio": "Specializing in Node.js backend systems, custom API architectures, and database control. Integrating electrical engineering insights with clean, scalable web software.",
+  "aboutMe": "I am a technology enthusiast, software developer, and B.Sc. candidate in Electrical and Electronics Engineering at North South University (expected in 2026). With a core focus on backend systems, I specialize in building performant Node.js engines, robust custom API integrations, and scalable PostgreSQL database structures.\n\nMy dual background in EEE and software development allows me to approach algorithmic and data problems at the intersecting boundaries of logical software and physical hardware. Whether collaborating to design resilient business platforms, crafting high-fidelity analytics dashboards, or embedding AI pathfinding into autonomous robotics, I strive for clean architecture and structural elegance. I am teachable, interactive, and driven to solve real-world industrial challenges through rigorous design.",
+  "skills": [
+    "Node.js Backend",
+    "API Design & Integration",
+    "PostgreSQL Database Control",
+    "JavaScript & TypeScript",
+    "Git Version Control",
+    "HTML & CSS Suite",
+    "Embedded Hardware & IoT",
+    "Technical Documentation",
+    "Problem-Solving & Teams"
+  ],
+  "socials": {
+    "github": "https://github.com/rafinholic",
+    "linkedin": "https://linkedin.com",
+    "twitter": "https://twitter.com",
+    "email": "ahmad.kamruzzaman043@gmail.com"
+  },
+  "resumeUrl": "#"
+}

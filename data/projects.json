@@ -1,0 +1,75 @@
+[
+  {
+    "id": "project-art-cms",
+    "title": "Artisanal Content Management System (CMS)",
+    "description": "A custom content organization system built with a developer team to support cataloging and digital curation for a prominent art gallery.",
+    "content": "## The Artwork Lifecycle & Curation Platform\n\nThis Custom Content Management System (CMS) was engineered in collaboration with a developer team specifically for the website of an art organization. Curation of physical and digital artwork requires highly bespoke, visual workflow control, different from typical modular blogs or static pages.\n\nOur primary target was to build an interface that allows gallery curators to organize collections, update live exhibitions, and upload high-fidelity image archives smoothly while retaining high interactive speed.\n\n## Database Structure & Core Contributions\n\n- **Bespoke Portfolio Nodes**: Designed flexible schemas to represent artwork metadata, artist profiles, medium categories, and historic exhibition associations.\n- **Intuitive Visual Flow**: Spearheaded critical components of the frontend development to ensure non-technical artists and gallery staff can curate items seamlessly without encountering technical friction.\n- **Responsive Art Portals**: Refined the grid assets and touch curation layout to optimize loading speeds of high-density graphic assets, preventing layout shifts and network choking.\n\n## Operational Impact\n\nThe CMS transformed the art organization's digitisation lifecycle. Artists can now submit entries directly, and curators can publish full dynamic exhibitions with customized layouts in minutes, preserving the aesthetic philosophy of the physical exhibitions.",
+    "category": "Web Development",
+    "tags": [
+      "CMS",
+      "Database Design",
+      "Team Collab",
+      "UI/UX Curation"
+    ],
+    "image": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80",
+    "demoUrl": "https://github.com/rafinholic",
+    "githubUrl": "https://github.com/rafinholic",
+    "featured": true,
+    "createdAt": "2025-10-12T00:00:00.000Z"
+  },
+  {
+    "id": "project-transit-ims",
+    "title": "TransitFlow Inventory Management System (IMS)",
+    "description": "An analytical dispatch and cargo inventory tracking controller featuring interactive charting and full responsive design.",
+    "content": "## Optimizing Supply Chain Logic & Vehicle Dispatch\n\nBuilt for a transport and logistics enterprise, this comprehensive Inventory Management System (IMS) streamlines tracking cargo, monitoring container stocks, and managing vehicular dispatch. Moving assets in transportation requires live, high-precision analytics to minimize idle times.\n\nOur team focused on replacing legacy physical logs with a high-throughput, responsive dashboard capable of updating inventory levels, dispatch times, and transaction data in real time.\n\n## Core Technical Highlights\n\n- **Live Analytics with Recharts**: Engineered interactive, high-density line charts, active bar visualizers, and stock analytics that flag low-supply depots or delayed transit vectors automatically.\n- **Modern Component Shell**: Developed the modular UI using Tailwind CSS paired with lightweight, headless elements. This ensures extremely fast loading speeds and complete responsive safety across rugged warehouse tablets, delivery mobile screens, and desktop dispatch centers.\n- **Automated Delivery (CI/CD)**: Set up a robust, zero-downtime deployment flow via GitHub and Vercel. Every single pull request runs through build verification, testing dependencies before merging seamlessly into production.\n\n## Outcomes & Fleet Efficiency\n\nThe system helped reduce logistical planning delays by 35% through consolidated dispatch metrics. Warehouse managers can audit active parts and vehicle statuses instantly, leading to highly optimized fuel usage and rapid delivery routes.",
+    "category": "Software Development",
+    "tags": [
+      "Recharts",
+      "Tailwind CSS",
+      "Headless UI",
+      "CI/CD Vercel",
+      "Inventory Systems"
+    ],
+    "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+    "demoUrl": "https://github.com/rafinholic",
+    "githubUrl": "https://github.com/rafinholic",
+    "featured": true,
+    "createdAt": "2026-02-14T00:00:00.000Z"
+  },
+  {
+    "id": "project-fire-robot",
+    "title": "AI Integrated Autonomous Firefighting Robot",
+    "description": "An autonomous exploration rover engineered for flame sensing, active maze-navigation, and safety hazard mitigation.",
+    "content": "## Hardware-Software Convergence for Emergency Response\n\nThis high-performance autonomous robot was designed and simulated as part of our academic B.Sc. Electrical and Electronics Engineering (EEE) curriculum. Building physical systems that respond to unpredictable thermal hazards requires combining real-time hardware signals with robust, edge-computed AI processing.\n\nThe autonomous rover moves dynamically through enclosed spaces, navigating obstacles, locating target heat points, and deploying fire extinguishing agents with absolute algorithmic precision.\n\n## System Architecture & Control Loops\n\n- **Multisensory Inputs**: Integrated flame sensors, infrared transducers, and ultrasonic distance modules bound to a centralized microcontroller unit.\n- **AI Pathfinding Module**: Programmed custom micro-pathfinding algorithms letting the robot navigate complex mazes, route around debris, and optimize search coverage in high-risk zones.\n- **Electronic Power Regulation**: Designed power distribution circuitry to regulate current draw from high-discharge lithium batteries, ensuring motor controls and active onboard water pumps run without brownout hazards.\n\n## Educational & Practical Realizations\n\nSuccessfully verified pathfinding logic and hardware integration across various physical test corridors. The research highlighted how embedding lightweight intelligent pathfinding agents onto physical silicon nodes significantly reduces response latency compared to centralized cloud-based control.",
+    "category": "Academic Projects",
+    "tags": [
+      "AI Pathfinding",
+      "Robotics Control",
+      "Microcontrollers",
+      "EEE Engineering"
+    ],
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80",
+    "demoUrl": "https://github.com/rafinholic",
+    "githubUrl": "https://github.com/rafinholic",
+    "featured": true,
+    "createdAt": "2025-05-20T00:00:00.000Z"
+  },
+  {
+    "id": "project-teg-generator",
+    "title": "Thermoelectric Generator Unit",
+    "description": "An eco-friendly energy-harvesting module converting waste temperature differentials into regulated electrical sensor power.",
+    "content": "## Green Energy Harvesting from Waste Heat\n\nWaste heat accounts for more than half of all industrial energy loss worldwide. The EcoVolt Thermoelectric Generator (TEG) project proposes an efficient, modular solution to capture ambient thermal differentials and convert them into stable, regulated electrical energy to drive low-power IoT sensing nodes.\n\nThe research represents an empirical fusion of material physics, electrical regulation circuits, and environmental sustainability principles.\n\n## Hardware Design & Engineering Process\n\n- **Seebeck-Effect Conversion**: Leveraged semiconductor-based bismuth telluride (Bi2Te3) thermoelectric couples subjected to active high-differential thermal zones.\n- **Active Boost Circuitry**: Designed and prototyped custom boost converters and step-up logic systems to elevate weak, millivolt-level TEG outputs into a stable 3.3V power rail.\n- **Telemetry & Logging**: Developed an integrated sensor monitoring board that measures active temperatures, output currents, and harvesting efficiency, transmitting metrics over serial links for statistical review.\n\n## Empirical Performance\n\nThe module successfully powered remote temperature and humidity sensor nodes continuously using simple, unassisted industrial machine heat. This project demonstrates the feasibility of self-powering industrial telemetry nodes, eliminating standard battery maintenance cycles and reducing environmental toxic waste.",
+    "category": "Academic Projects",
+    "tags": [
+      "Energy Harvesting",
+      "circuits",
+      "Electrical Design",
+      "EcoTech"
+    ],
+    "image": "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&w=1200&q=80",
+    "demoUrl": "https://github.com/rafinholic",
+    "githubUrl": "https://github.com/rafinholic",
+    "featured": false,
+    "createdAt": "2024-11-05T00:00:00.000Z"
+  }
+]
