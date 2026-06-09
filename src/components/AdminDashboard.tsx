@@ -16,6 +16,8 @@ import {
   EyeOff,
   User,
   ExternalLink,
+  Upload,
+  FileText,
 } from "lucide-react";
 
 interface AdminDashboardProps {
@@ -79,6 +81,71 @@ export default function AdminDashboard({
   const showStatus = (type: "success" | "error", text: string) => {
     setStatus({ type, text });
     setTimeout(() => setStatus({ type: null, text: "" }), 4000);
+  };
+
+  // Resume upload state
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState<{ type: "success" | "error" | null; text: string }>({
+    type: null,
+    text: "",
+  });
+
+  const handleResumeUpload = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedFile) return;
+
+    setIsUploading(true);
+    setUploadStatus({ type: null, text: "" });
+
+    try {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Content = reader.result as string;
+
+        try {
+          const resp = await fetch("/api/admin/resume/upload", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              fileName: selectedFile.name,
+              fileContent: base64Content,
+            }),
+          });
+
+          if (resp.ok) {
+            const data = await resp.json();
+            setUploadStatus({ type: "success", text: "Resume uploaded successfully!" });
+            setSettingsForm((prev) => ({ ...prev, resumeUrl: data.resumeUrl }));
+            setSelectedFile(null);
+            
+            // Reset the file input element description
+            const fileInput = document.getElementById("resume-file-input") as HTMLInputElement;
+            if (fileInput) fileInput.value = "";
+            
+            showStatus("success", "Resume uploaded successfully!");
+            await onRefreshPortfolio();
+          } else {
+            const errData = await resp.json();
+            setUploadStatus({ type: "error", text: errData.error || "Upload failed." });
+          }
+        } catch (err) {
+          console.error(err);
+          setUploadStatus({ type: "error", text: "Failed to connect to backend API." });
+        } finally {
+          setIsUploading(false);
+        }
+      };
+
+      reader.readAsDataURL(selectedFile);
+    } catch (err) {
+      console.error(err);
+      setUploadStatus({ type: "error", text: "Failed to read local file." });
+      setIsUploading(false);
+    }
   };
 
   // Sync settings/projects with form when they load
@@ -763,6 +830,75 @@ export default function AdminDashboard({
                     placeholder="https://..."
                   />
                 </div>
+              </div>
+
+              {/* Upload Resume Section */}
+              <div className="p-5 border border-dashed border-zinc-250 dark:border-zinc-800 rounded-lg space-y-4 bg-zinc-50/30 dark:bg-zinc-900/10">
+                <div className="flex items-center space-x-2">
+                  <Upload size={14} className="text-[#a855f7] dark:text-[#c084fc]" />
+                  <h4 className="font-display font-semibold text-xs text-zinc-900 dark:text-white uppercase tracking-wider">
+                    Upload Physical Resume Document
+                  </h4>
+                </div>
+                <p className="font-sans font-light text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed">
+                  Upload your updated CV (PDF, DOCX, or DOC). This will automatically host the file and update your active landing page resume download link.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 animate-fade-in">
+                  <div className="flex-1 relative">
+                    <input
+                      type="file"
+                      id="resume-file-input"
+                      accept=".pdf,.doc,.docx"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          setSelectedFile(e.target.files[0]);
+                          setUploadStatus({ type: null, text: "" });
+                        }
+                      }}
+                      className="hidden"
+                    />
+                    <label
+                      htmlFor="resume-file-input"
+                      className="flex items-center space-x-2.5 px-4 py-3 border border-zinc-200 hover:border-zinc-305 dark:border-zinc-850 dark:hover:border-zinc-750 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 rounded-md text-xs font-semibold cursor-pointer transition-all duration-200"
+                    >
+                      <FileText size={14} className="text-zinc-400" />
+                      <span className="truncate flex-1 text-left">
+                        {selectedFile ? selectedFile.name : "Choose a PDF/Doc resume file..."}
+                      </span>
+                    </label>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleResumeUpload}
+                    disabled={!selectedFile || isUploading}
+                    className="flex items-center justify-center space-x-1.5 px-5 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 disabled:bg-zinc-100 dark:disabled:bg-zinc-900 disabled:text-zinc-400 rounded-md text-xs font-semibold cursor-pointer shadow-xs transition-colors disabled:cursor-not-allowed whitespace-nowrap"
+                    id="submit-resume-upload-button"
+                  >
+                    {isUploading ? (
+                      <span>Uploading...</span>
+                    ) : (
+                      <>
+                        <Upload size={13} />
+                        <span>Upload Resume</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {uploadStatus.type && (
+                  <div
+                    className={`p-3 text-xs border rounded-md flex items-center space-x-2 ${
+                      uploadStatus.type === "success"
+                        ? "bg-emerald-50 text-emerald-800 border-emerald-250 dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-emerald-900/30"
+                        : "bg-red-50 text-red-00 border-red-250/20 dark:bg-red-955/20 dark:text-red-450 dark:border-red-900/30"
+                    }`}
+                  >
+                    <Check size={12} className="flex-shrink-0" />
+                    <span>{uploadStatus.text}</span>
+                  </div>
+                )}
               </div>
 
               {/* Social Channels Config Frame */}

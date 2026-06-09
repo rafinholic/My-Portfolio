@@ -131,7 +131,29 @@ const getProjects = (): Project[] => readJSONFile(PROJECTS_FILE, DEFAULT_PROJECT
 const getMessages = (): ContactMessage[] => readJSONFile(MESSAGES_FILE, []);
 
 // Body parsers
-app.use(express.json());
+app.use(express.json({ limit: "15mb" }));
+app.use(express.urlencoded({ limit: "15mb", extended: true }));
+
+// Public API: Download/View Resume
+app.get("/api/resume/download", (req, res) => {
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      return res.status(404).send("Data directory not found.");
+    }
+    const dataFiles = fs.readdirSync(DATA_DIR);
+    const resumeFile = dataFiles.find((f) => f.toLowerCase().startsWith("resume."));
+
+    if (resumeFile) {
+      const filePath = path.join(DATA_DIR, resumeFile);
+      if (fs.existsSync(filePath)) {
+        return res.download(filePath, `Ahmad_Kamruzzaman_Resume${path.extname(resumeFile)}`);
+      }
+    }
+  } catch (err) {
+    console.error("Error sending resume download:", err);
+  }
+  res.status(404).send("Resume file not found on the server. Please upload a resume from the admin dashboard.");
+});
 
 // Public API: Get entire portfolio configuration (Settings + Projects)
 app.get("/api/portfolio", (req, res) => {
@@ -248,6 +270,60 @@ app.put("/api/admin/settings", requireAdminAuth, (req, res) => {
 
   writeJSONFile(SETTINGS_FILE, updatedSettings);
   res.json({ success: true, settings: updatedSettings });
+});
+
+// Admin API: Upload Resume
+app.post("/api/admin/resume/upload", requireAdminAuth, (req, res) => {
+  const { fileName, fileContent } = req.body;
+
+  if (!fileContent) {
+    return res.status(400).json({ error: "File content is required." });
+  }
+
+  try {
+    const matches = fileContent.match(/^data:(.+);base64,(.+)$/);
+    let buffer: Buffer;
+    let ext = ".pdf";
+
+    if (fileName) {
+      const parsedExt = path.extname(fileName);
+      if (parsedExt) {
+        ext = parsedExt.toLowerCase();
+      }
+    }
+
+    if (matches && matches.length === 3) {
+      buffer = Buffer.from(matches[2], "base64");
+    } else {
+      buffer = Buffer.from(fileContent, "base64");
+    }
+
+    // Clean up any existing resume file first to avoid mixed formats (.pdf vs .docx)
+    try {
+      const existingFiles = fs.readdirSync(DATA_DIR);
+      existingFiles.forEach((file) => {
+        if (file.toLowerCase().startsWith("resume.")) {
+          fs.unlinkSync(path.join(DATA_DIR, file));
+        }
+      });
+    } catch (e) {
+      console.warn("Error cleaning up existing resume files:", e);
+    }
+
+    const uploadName = `resume${ext}`;
+    const uploadPath = path.join(DATA_DIR, uploadName);
+    fs.writeFileSync(uploadPath, buffer);
+
+    // Save update to settings.json
+    const settings = getSettings();
+    settings.resumeUrl = `/api/resume/download?v=${Date.now()}`;
+    writeJSONFile(SETTINGS_FILE, settings);
+
+    res.json({ success: true, resumeUrl: settings.resumeUrl, fileName: uploadName });
+  } catch (error: any) {
+    console.error("Failed to save resume:", error);
+    res.status(500).json({ error: "Failed to write resume file on server." });
+  }
 });
 
 // Admin API: Post New Project

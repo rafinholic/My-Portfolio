@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Project, PortfolioSettings } from "../types";
-import { ExternalLink, Github, Mail, Send, CheckCircle2, ChevronRight, X } from "lucide-react";
+import { ExternalLink, Github, Mail, Send, CheckCircle2, ChevronRight, X, Download } from "lucide-react";
 
 interface PortfolioViewProps {
   settings: PortfolioSettings;
@@ -313,7 +313,50 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
         </div>
       </section>
 
-      {/* 4. Contact Form Section */}
+      {/* 4. Download Resume Section */}
+      <section
+        className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-zinc-200/60 dark:border-zinc-850 pt-20"
+        id="resume-section"
+      >
+        <div className="lg:col-span-4 space-y-4">
+          <h2 className="font-serif font-medium text-3xl sm:text-4xl text-zinc-900 dark:text-white">
+            Curriculum Vitae
+          </h2>
+          <p className="font-mono text-[9px] tracking-widest text-[#0A0A0A] dark:text-zinc-400 leading-relaxed uppercase">
+            / PROFESSIONAL COMPASS & SUMMARY DECK /
+          </p>
+        </div>
+
+        <div className="lg:col-span-8">
+          <div className="border border-zinc-200/80 dark:border-zinc-850 bg-white dark:bg-[#121212] p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+            <div className="space-y-2">
+              <h3 className="font-serif font-medium text-xl text-zinc-900 dark:text-white">
+                Technical Resume Timeline
+              </h3>
+              <p className="font-sans font-light text-zinc-500 dark:text-zinc-400 text-sm max-w-md">
+                Click below to retrieve the comprehensive curriculum vitae compiled with my backend architectures, EEE systems coursework, and complete academic portfolio.
+              </p>
+            </div>
+            {settings.resumeUrl && settings.resumeUrl !== "#" ? (
+              <a
+                href={settings.resumeUrl}
+                download
+                className="inline-flex items-center space-x-3 bg-zinc-950 hover:bg-zinc-850 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 px-6 py-3.5 rounded-none text-xs font-semibold uppercase tracking-widest transition-all duration-200 whitespace-nowrap cursor-pointer"
+                id="landing-download-resume-button"
+              >
+                <Download size={14} />
+                <span>Download Resume</span>
+              </a>
+            ) : (
+              <span className="text-xs font-mono text-zinc-400 italic">
+                Resume document is currently not configured on this portfolio.
+              </span>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Contact Form Section */}
       <section
         className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-zinc-200/60 dark:border-zinc-850 pt-20"
         id="contact-section"
@@ -327,9 +370,12 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
           </p>
           <div className="space-y-1.5 pt-4">
             <span className="block text-[8px] font-mono tracking-widest text-[#0A0A0A] dark:text-zinc-400 uppercase">/ PERSISTENT ADDR</span>
-            <span className="font-mono text-xs text-[#0A0A0A] dark:text-zinc-200 block underline underline-offset-4 leading-normal">
+            <a
+              href={`mailto:${settings.socials.email}`}
+              className="font-mono text-xs text-[#0A0A0A] dark:text-zinc-200 block underline underline-offset-4 leading-normal hover:text-zinc-500 dark:hover:text-white transition-colors cursor-pointer"
+            >
               {settings.socials.email}
-            </span>
+            </a>
           </div>
         </div>
 
@@ -427,7 +473,7 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
         </div>
       </section>
 
-      {/* 5. Project Details Overlay Modal */}
+      {/* 6. Project Details Overlay Modal */}
       {selectedProject && (
         <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-zinc-950/70 backdrop-blur-md animate-fade-in" id="project-detail-modal">
           <div className="relative w-full max-w-3xl max-h-[85vh] bg-white dark:bg-[#121212] border border-zinc-300 dark:border-zinc-800 rounded-none overflow-y-auto shadow-none p-6 sm:p-8 space-y-6">
