@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { Project, PortfolioSettings } from "../types";
 import { ExternalLink, Github, Mail, Send, CheckCircle2, ChevronRight, X, Download } from "lucide-react";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, { message: "Name is required." }).max(100, { message: "Name can be at most 100 characters." }),
+  email: z.string().trim().min(1, { message: "Email is required." }).email({ message: "Please provide a valid email address." }),
+  subject: z.string().trim().max(150, { message: "Subject can be at most 150 characters." }).optional().or(z.literal("")),
+  message: z.string().trim().min(1, { message: "Message content is required." }).min(10, { message: "Message must be at least 10 characters." }).max(2000, { message: "Message can be at most 2000 characters." }),
+});
 
 interface PortfolioViewProps {
   settings: PortfolioSettings;
@@ -14,6 +22,7 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
   
   // Contact state
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [errors, setErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error" | null; text: string }>({
     type: null,
@@ -31,17 +40,32 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    const field = name as "name" | "email" | "subject" | "message";
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
   };
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      setSubmitStatus({ type: "error", text: "Please fill in all required fields." });
+    setSubmitStatus({ type: null, text: "" });
+    setErrors({});
+
+    const result = contactSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: { name?: string; email?: string; subject?: string; message?: string } = {};
+      result.error.issues.forEach((issue) => {
+        const path = issue.path[0];
+        if (path === "name" || path === "email" || path === "subject" || path === "message") {
+          fieldErrors[path] = issue.message;
+        }
+      });
+      setErrors(fieldErrors);
+      setSubmitStatus({ type: "error", text: "Please correct the highlighted validation errors." });
       return;
     }
 
     setIsSubmitting(true);
-    setSubmitStatus({ type: null, text: "" });
 
     try {
       const response = await fetch("/api/contact", {
@@ -393,9 +417,12 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
                   required
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-none bg-[#FAF9F6] dark:bg-[#0A0A0A]/40 border border-zinc-200 dark:border-zinc-800 text-[#0A0A0A] dark:text-white focus:outline-none focus:border-[#0A0A0A] dark:focus:border-white transition-colors text-sm"
+                  className={`w-full px-4 py-3 rounded-none bg-[#FAF9F6] dark:bg-[#0A0A0A]/40 border ${errors.name ? 'border-red-500 focus:border-red-500' : 'border-zinc-200 dark:border-zinc-800 focus:border-[#0A0A0A] dark:focus:border-white'} text-[#0A0A0A] dark:text-white focus:outline-none transition-colors text-sm`}
                   placeholder="Jane Miller"
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-[10px] font-mono mt-1" id="name-input-error">// {errors.name}</p>
+                )}
               </div>
 
               <div className="space-y-1.5">
@@ -409,9 +436,12 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
                   required
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-none bg-[#FAF9F6] dark:bg-[#0A0A0A]/40 border border-zinc-200 dark:border-zinc-800 text-[#0A0A0A] dark:text-white focus:outline-none focus:border-[#0A0A0A] dark:focus:border-white transition-colors text-sm"
+                  className={`w-full px-4 py-3 rounded-none bg-[#FAF9F6] dark:bg-[#0A0A0A]/40 border ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-zinc-200 dark:border-zinc-800 focus:border-[#0A0A0A] dark:focus:border-white'} text-[#0A0A0A] dark:text-white focus:outline-none transition-colors text-sm`}
                   placeholder="jane@example.com"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-[10px] font-mono mt-1" id="email-input-error">// {errors.email}</p>
+                )}
               </div>
             </div>
 
@@ -425,9 +455,12 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
                 id="subject-input"
                 value={formData.subject}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-none bg-[#FAF9F6] dark:bg-[#0A0A0A]/40 border border-zinc-200 dark:border-zinc-800 text-[#0A0A0A] dark:text-white focus:outline-none focus:border-[#0A0A0A] dark:focus:border-white transition-colors text-sm"
+                className={`w-full px-4 py-3 rounded-none bg-[#FAF9F6] dark:bg-[#0A0A0A]/40 border ${errors.subject ? 'border-red-500 focus:border-red-500' : 'border-zinc-200 dark:border-zinc-800 focus:border-[#0A0A0A] dark:focus:border-white'} text-[#0A0A0A] dark:text-white focus:outline-none transition-colors text-sm`}
                 placeholder="Collaboration, consulting, systems..."
               />
+              {errors.subject && (
+                <p className="text-red-500 text-[10px] font-mono mt-1" id="subject-input-error">// {errors.subject}</p>
+              )}
             </div>
 
             <div className="space-y-1.5">
@@ -441,9 +474,12 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
                 rows={5}
                 value={formData.message}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-none bg-[#FAF9F6] dark:bg-[#0A0A0A]/40 border border-zinc-200 dark:border-zinc-800 text-[#0A0A0A] dark:text-white focus:outline-none focus:border-[#0A0A0A] dark:focus:border-white transition-colors text-sm"
+                className={`w-full px-4 py-3 rounded-none bg-[#FAF9F6] dark:bg-[#0A0A0A]/40 border ${errors.message ? 'border-red-500 focus:border-red-500' : 'border-zinc-200 dark:border-zinc-800 focus:border-[#0A0A0A] dark:focus:border-white'} text-[#0A0A0A] dark:text-white focus:outline-none transition-colors text-sm`}
                 placeholder="Describe your design specifications, scope details, timelines..."
               ></textarea>
+              {errors.message && (
+                <p className="text-red-500 text-[10px] font-mono mt-1" id="message-input-error">// {errors.message}</p>
+              )}
             </div>
 
             {submitStatus.type && (
