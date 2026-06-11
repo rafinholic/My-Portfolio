@@ -1,18 +1,18 @@
 {
   "name": "Ahmad Kamruzzaman",
-  "title": "Backend Developer & EEE Engineer",
-  "bio": "Specializing in Node.js backend systems, custom API architectures, and database control. Integrating electrical engineering insights with clean, scalable web software.",
-  "aboutMe": "I am a technology enthusiast, software developer, and B.Sc. candidate in Electrical and Electronics Engineering at North South University (expected in 2026). With a core focus on backend systems, I specialize in building performant Node.js engines, robust custom API integrations, and scalable PostgreSQL database structures.\n\nMy dual background in EEE and software development allows me to approach algorithmic and data problems at the intersecting boundaries of logical software and physical hardware. Whether collaborating to design resilient business platforms, crafting high-fidelity analytics dashboards, or embedding AI pathfinding into autonomous robotics, I strive for clean architecture and structural elegance. I am teachable, interactive, and driven to solve real-world industrial challenges through rigorous design.",
+  "title": "Junior Software Developer",
+  "bio": "Detail-oriented software developer with hands-on experience building and deploying web applications using React, JavaScript, Node.js, and PostgreSQL. Bridging EEE insights with clean, scalable full-stack software.",
+  "aboutMe": "I am a detail-oriented Junior Software Developer and B.Sc. candidate in Electrical and Electronics Engineering (EEE) at North South University (expected in 2026). With hands-on experience building and deploying web applications using React, JavaScript, Node.js, and PostgreSQL, I specialize in full-stack web development, custom API architectures, and robust database setups.\n\nMy dual background in EEE and software development provides a strong analytical foundation for solving complex technical problems at the intersection of logical software and physical hardware. From engineering Content Management Systems and building real-time inventory management dashboards with analytical charting, to automating continuous delivery pipelines (CI/CD) on Vercel, I strive for clean architecture and structural elegance. I am teachable, interactive, and driven to solve real-world industrial challenges through rigorous software design.",
   "skills": [
+    "React & TypeScript",
     "Node.js Backend",
-    "API Design & Integration",
-    "PostgreSQL Database Control",
-    "JavaScript & TypeScript",
-    "Git Version Control",
-    "HTML & CSS Suite",
-    "Embedded Hardware & IoT",
-    "Technical Documentation",
-    "Problem-Solving & Teams"
+    "PostgreSQL DB Management",
+    "Tailwind CSS & Headless UI",
+    "REST API Development",
+    "CI/CD & Git/GitHub",
+    "Agile / Scrum / Version Control",
+    "Embedded Hardware & Robotics",
+    "Technical Writing & Documentation"
   ],
   "socials": {
     "github": "https://github.com/rafinholic",
