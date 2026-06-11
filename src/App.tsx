@@ -287,12 +287,6 @@ export default function App() {
               >
                 {isCheckingLogin ? "Verifying Credentials..." : "Access Console"}
               </button>
-
-              <div className="text-center">
-                <span className="text-[10px] text-zinc-400 block max-w-xs mx-auto font-mono tracking-normal leading-relaxed">
-                  💡 Hint: Default passcode is <strong className="font-mono text-zinc-500 font-medium">admin123</strong> (override in host environments via ADMIN_PASSWORD)
-                </span>
-              </div>
             </form>
           </div>
         </div>

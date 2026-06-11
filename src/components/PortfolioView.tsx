@@ -122,21 +122,7 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
           {settings.bio}
         </p>
         <div className="flex flex-wrap gap-4 pt-4">
-          <button
-            onClick={() => document.getElementById("gallery-section")?.scrollIntoView({ behavior: "smooth" })}
-            className="group flex items-center space-x-3 bg-zinc-950 hover:bg-zinc-850 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 px-6 py-3.5 rounded-none text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-none"
-            id="hero-view-works-button"
-          >
-            <span>Explore Works</span>
-            <ChevronRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
-          </button>
-          <button
-            onClick={() => document.getElementById("contact-section")?.scrollIntoView({ behavior: "smooth" })}
-            className="flex items-center space-x-3 border border-zinc-200/80 dark:border-zinc-800 dark:hover:border-zinc-650 hover:bg-zinc-50 dark:hover:bg-zinc-900/30 px-6 py-3.5 rounded-none text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer text-left"
-            id="hero-contact-button"
-          >
-            <span>Get in Touch</span>
-          </button>
+          
         </div>
       </section>
 
