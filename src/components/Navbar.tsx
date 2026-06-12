@@ -45,7 +45,7 @@ export default function Navbar({
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-[#FAF9F6]/80 dark:bg-[#0A0A0A]/80 border-b border-zinc-200/40 dark:border-zinc-850/40 transition-colors duration-300">
+    <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-[#ffdb2a]/80 dark:bg-[#0A0A0A]/80 border-b border-zinc-200/40 dark:border-zinc-850/40 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex justify-between items-center h-20">
           {/* Logo / Brand */}
@@ -145,7 +145,7 @@ export default function Navbar({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-zinc-200/85 dark:border-zinc-850/85 bg-[#FAF9F6] dark:bg-[#0A0A0A] px-6 pt-2 pb-6 space-y-3 animate-slide-down">
+        <div className="md:hidden border-b border-zinc-200/85 dark:border-zinc-850/85 bg-[#ffdb2a] dark:bg-[#0A0A0A] px-6 pt-2 pb-6 space-y-3 animate-slide-down">
           {currentView === "portfolio" &&
             navItems.map((item) => (
               <button

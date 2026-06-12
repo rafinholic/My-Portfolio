@@ -121,7 +121,7 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#FAF9F6] dark:bg-[#0A0A0A] flex flex-col justify-center items-center font-sans">
+      <div className="min-h-screen bg-[#ffdb2a] dark:bg-[#0A0A0A] flex flex-col justify-center items-center font-sans">
         <div className="space-y-4 text-center">
           <div className="w-8 h-8 border-2 border-zinc-200 dark:border-zinc-800 border-t-zinc-900 dark:border-t-zinc-100 rounded-none animate-spin mx-auto"></div>
           <p className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase">
@@ -134,7 +134,7 @@ export default function App() {
 
   if (loadError || !settings) {
     return (
-      <div className="min-h-screen bg-[#FAF9F6] dark:bg-[#0A0A0A] flex flex-col justify-center items-center font-sans p-4">
+      <div className="min-h-screen bg-[#ffdb2a] dark:bg-[#0A0A0A] flex flex-col justify-center items-center font-sans p-4">
         <div className="max-w-md w-full bg-white dark:bg-[#121212] rounded-none border border-zinc-200/60 dark:border-zinc-800/80 p-6 sm:p-8 text-center space-y-5">
           <AlertCircle size={40} className="text-zinc-900 dark:text-zinc-100 mx-auto" />
           <div className="space-y-2">
@@ -160,7 +160,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] transition-colors duration-300 font-sans flex flex-col relative selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-950">
+    <div className="min-h-screen bg-[#ffdb2a] text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] transition-colors duration-300 font-sans flex flex-col relative selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-950">
       
       {/* Universal Sticky Navigation */}
       <Navbar
@@ -195,7 +195,7 @@ export default function App() {
       </main>
 
       {/* Modern High-contrast Minimal Page Footer */}
-      <footer className="w-full bg-[#FAF9F6] dark:bg-[#0A0A0A] border-t border-zinc-200/80 dark:border-zinc-800/80 py-12">
+      <footer className="w-full bg-[#ffdb2a] dark:bg-[#0A0A0A] border-t border-zinc-200/80 dark:border-zinc-800/80 py-12">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="space-y-1.5 text-center sm:text-left select-none">
             <span className="font-serif font-semibold text-lg tracking-tight text-[#0A0A0A] dark:text-white">

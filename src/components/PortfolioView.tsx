@@ -118,7 +118,7 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
         <h2 className="font-mono italic font-medium text-2xl sm:text-3xl text-zinc-600 dark:text-zinc-350">
           {settings.title}
         </h2>
-        <p className="font-sans font-light text-zinc-500 dark:text-zinc-400 max-w-2xl text-base sm:text-lg leading-relaxed border-l border-zinc-250 dark:border-zinc-800 pl-6">
+        <p className="font-mono lowercase font-light text-zinc-500 dark:text-zinc-400 max-w-2xl text-base sm:text-lg leading-relaxed border-l border-zinc-250 dark:border-zinc-800 pl-6">
           {settings.bio}
         </p>
         <div className="flex flex-wrap gap-4 pt-4">
