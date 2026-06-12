@@ -109,9 +109,9 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
         className="flex flex-col justify-center min-h-[55vh] py-12 space-y-8 animate-fade-in"
         id="hero-section"
       >
-        <span className="font-mono text-[10px] tracking-widest text-zinc-550 dark:text-zinc-400 uppercase font-medium">
+        {/*<span className="font-mono text-[10px] tracking-widest text-zinc-550 dark:text-zinc-400 uppercase font-medium">
           / AVAILABLE FOR SELECT COLLAB & COMMISSIONS /
-        </span>
+        </span>*/}
         <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl text-[#0A0A0A] dark:text-white leading-[1.05] tracking-tight">
           Hi, I am <span className="font-semibold block sm:inline italic text-[#0A0A0A] dark:text-[#F5F5F5]">{settings.name}</span>
         </h1>

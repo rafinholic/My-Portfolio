@@ -1,5 +1,5 @@
 {
-  "name": "Creative Interactive Portfolio",
+  "name": "Kamruzzaman Portfolio",
   "description": "A minimalistic and smooth-scrolling creative portfolio with dark mode, interactive gallery, contact form, and secure admin dashboard to manage projects and read messages.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
