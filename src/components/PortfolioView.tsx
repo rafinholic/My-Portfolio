@@ -115,7 +115,7 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
         <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl text-[#0A0A0A] dark:text-white leading-[1.05] tracking-tight">
           Hi, I am <span className="font-semibold block sm:inline italic text-[#0A0A0A] dark:text-[#F5F5F5]">{settings.name}</span>
         </h1>
-        <h2 className="font-serif italic font-medium text-2xl sm:text-3xl text-zinc-600 dark:text-zinc-350">
+        <h2 className="font-mono italic font-medium text-2xl sm:text-3xl text-zinc-600 dark:text-zinc-350">
           {settings.title}
         </h2>
         <p className="font-sans font-light text-zinc-500 dark:text-zinc-400 max-w-2xl text-base sm:text-lg leading-relaxed border-l border-zinc-250 dark:border-zinc-800 pl-6">
