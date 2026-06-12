@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Project, PortfolioSettings } from "../types";
 import { ExternalLink, Github, Mail, Send, CheckCircle2, ChevronRight, X, Download } from "lucide-react";
 import { z } from "zod";
@@ -20,6 +20,147 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let width = canvas.width;
+    let height = canvas.height;
+
+    // Elegant nodes / particles
+    const particles: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+    }> = [];
+
+    const particleCount = 28;
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: Math.random() * 1.5 + 1,
+      });
+    }
+
+    let mouse = { x: -1000, y: -1000 };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = width / rect.width;
+      const scaleY = height / rect.height;
+      mouse.x = (e.clientX - rect.left) * scaleX;
+      mouse.y = (e.clientY - rect.top) * scaleY;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    canvas.addEventListener("mousemove", handleMouseMove);
+    canvas.addEventListener("mouseleave", handleMouseLeave);
+
+    const isDarkMode = () => document.documentElement.classList.contains("dark");
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      const dark = isDarkMode();
+      // Use higher contrast or softer colors that match the yellow bg and dark mode bg
+      const strokeColor = dark ? "rgba(255, 255, 255, 0.08)" : "rgba(10, 10, 10, 0.08)";
+      const dotColor = dark ? "rgba(255, 255, 255, 0.3)" : "rgba(10, 10, 10, 0.35)";
+      const hoverLineColor = dark ? "rgba(255, 255, 255, 0.2)" : "rgba(10, 10, 10, 0.18)";
+
+      // Draw elegant grid lines in background
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = 0.5;
+      const gridSpacing = 20;
+      for (let x = 0; x < width; x += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Update & Draw particles
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = dotColor;
+        ctx.fill();
+      });
+
+      // Draw lines between nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 60) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw interactive lines to mouse
+      if (mouse.x > 0 && mouse.y > 0) {
+        particles.forEach((p) => {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 80) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = hoverLineColor;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        });
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      canvas.removeEventListener("mousemove", handleMouseMove);
+      canvas.removeEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   // Contact state
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({});
@@ -106,23 +247,31 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
       
       {/* 1. Hero Section */}
       <section
-        className="flex flex-col justify-center min-h-[55vh] py-12 space-y-8 animate-fade-in"
+        className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center min-h-[55vh] py-12"
         id="hero-section"
       >
-        {/*<span className="font-mono text-[10px] tracking-widest text-zinc-550 dark:text-zinc-400 uppercase font-medium">
-          / AVAILABLE FOR SELECT COLLAB & COMMISSIONS /
-        </span>*/}
-        <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl text-[#0A0A0A] dark:text-white leading-[1.05] tracking-tight">
-          Hi, I am <span className="font-semibold block sm:inline italic text-[#0A0A0A] dark:text-[#F5F5F5]">{settings.name}</span>
-        </h1>
-        <h2 className="font-mono italic font-medium text-2xl sm:text-3xl text-zinc-600 dark:text-zinc-350">
-          {settings.title}
-        </h2>
-        <p className="font-mono lowercase font-light text-zinc-500 dark:text-zinc-400 max-w-2xl text-base sm:text-lg leading-relaxed border-l border-zinc-250 dark:border-zinc-800 pl-6">
-          {settings.bio}
-        </p>
-        <div className="flex flex-wrap gap-4 pt-4">
-          
+        <div className="md:col-span-7 space-y-6 animate-fade-in">
+          <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl text-[#0A0A0A] dark:text-white leading-[1.05] tracking-tight">
+            Hi, I am <span className="font-semibold block sm:inline italic text-[#0A0A0A] dark:text-[#F5F5F5]">{settings.name}</span>
+          </h1>
+          <h2 className="font-mono italic font-medium text-2xl sm:text-3xl text-zinc-600 dark:text-zinc-350">
+            {settings.title}
+          </h2>
+          <p className="font-mono lowercase font-light text-zinc-500 dark:text-zinc-400 max-w-2xl text-base sm:text-lg leading-relaxed border-l border-zinc-250 dark:border-zinc-800 pl-6">
+            {settings.bio}
+          </p>
+        </div>
+        
+        <div className="md:col-span-5 flex justify-center items-center h-full w-full animate-fade-in">
+          <div className="w-full max-w-[577px] border border-zinc-900/10 dark:border-white/10 p-2 bg-[#FAF9F6]/20 dark:bg-[#0A0A0A]/20 backdrop-blur-sm self-center">
+            <canvas
+              ref={canvasRef}
+              className="home-hero-canvas w-full h-auto block bg-transparent"
+              aria-hidden="true"
+              width="577"
+              height="200"
+            />
+          </div>
         </div>
       </section>
 
