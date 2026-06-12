@@ -336,11 +336,10 @@ const requireAdminAuth = (req: express.Request, res: express.Response, next: exp
     return next();
   }
 
-  // 2. Fallbacks for automation bypass / active system triggers
-  const expectedTokenPrefix = `token-${Buffer.from(adminPassword).toString("base64")}-`;
-  if (token.startsWith(expectedTokenPrefix) || token === `direct-bypass-${adminPassword}`) {
-    return next();
-  }
+ if (validateCryptoSessionToken(token)) {
+  return next();
+}
+return res.status(403).json({ error: "Session expired or invalid. Please sign back in." });
 
   return res.status(403).json({ error: "Authenticated session has expired or is invalid. Please sign back in." });
 };
