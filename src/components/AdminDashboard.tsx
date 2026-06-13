@@ -523,14 +523,15 @@ export default function AdminDashboard({
                             onClick={() => openEditProject(proj)}
                             className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-md cursor-pointer transition-colors"
                             title="Edit Project"
+                            id={`edit-proj-btn-${proj.id}`}
                           >
                             <Edit size={14} />
                           </button>
                           <button
-                            type="button"
                             onClick={() => handleDeleteProject(proj.id, proj.title)}
                             className="p-1.5 hover:bg-red-50 dark:hover:bg-red-955 text-zinc-500 hover:text-red-650 dark:hover:text-red-400 rounded-md cursor-pointer transition-colors"
                             title="Delete Project"
+                            id={`delete-proj-btn-${proj.id}`}
                           >
                             <Trash2 size={14} />
                           </button>
@@ -557,8 +558,6 @@ export default function AdminDashboard({
                       }}
                       className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-full cursor-pointer transition-colors"
                       id="close-form-btn"
-                      title="Close form"
-                      aria-label="Close form"
                     >
                       <ArrowLeft size={16} />
                     </button>
@@ -1003,6 +1002,7 @@ export default function AdminDashboard({
                           ? "bg-zinc-50/40 border-zinc-100 dark:bg-zinc-900/10 dark:border-zinc-900 text-zinc-500"
                           : "bg-white border-zinc-200 dark:bg-zinc-950 dark:border-zinc-800 shadow-xs"
                       }`}
+                      id={`message-row-${msg.id}`}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-150/10 pb-3">
                         <div>
@@ -1024,18 +1024,18 @@ export default function AdminDashboard({
                         {/* Actions */}
                         <div className="flex items-center space-x-1.5">
                           <button
-                            type="button"
                             onClick={() => toggleMessageRead(msg.id)}
                             className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md cursor-pointer transition-colors text-zinc-500 hover:text-zinc-950 dark:hover:text-white"
                             title={msg.read ? "Mark as Unread" : "Mark as Read"}
+                            id={`read-message-${msg.id}`}
                           >
                             {msg.read ? <EyeOff size={13} /> : <Eye size={13} />}
                           </button>
                           <button
-                            type="button"
                             onClick={() => handleDeleteMessage(msg.id)}
                             className="p-1.5 hover:bg-red-50 dark:hover:bg-red-955 rounded-md cursor-pointer transition-colors text-zinc-500 hover:text-red-650 dark:hover:text-red-400"
                             title="Delete Message"
+                            id={`delete-message-${msg.id}`}
                           >
                             <Trash2 size={13} />
                           </button>
