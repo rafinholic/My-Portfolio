@@ -269,7 +269,7 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
               className="home-hero-canvas w-full h-auto block bg-transparent"
               aria-hidden="true"
               width="577"
-              height="200"
+              height="300"
             />
           </div>
         </div>
