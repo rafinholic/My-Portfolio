@@ -680,7 +680,7 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
             </div>
 
             {/* Sub-header detail grids */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-6 border-b border-zinc-200/80 dark:border-zinc-850">
+            <div className="pb-6 border-b border-zinc-200/80 dark:border-zinc-850">
               <div className="space-y-3">
                 <h4 className="font-mono text-[10px] tracking-widest text-zinc-450 uppercase">
                   // Technology Inventory
@@ -694,36 +694,6 @@ export default function PortfolioView({ settings, projects, onMessageSent }: Por
                       {tg}
                     </span>
                   ))}
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <h4 className="font-mono text-[10px] tracking-widest text-[#0a0a0a] dark:text-white uppercase">
-                  // Links & Release Code
-                </h4>
-                <div className="flex flex-wrap gap-4">
-                  {selectedProject.demoUrl && (
-                    <a
-                      href={selectedProject.demoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center space-x-1.5 text-xs uppercase tracking-wider font-semibold text-zinc-950 dark:text-zinc-200 underline underline-offset-4"
-                    >
-                      <ExternalLink size={13} />
-                      <span>Live Deployment</span>
-                    </a>
-                  )}
-                  {selectedProject.githubUrl && (
-                    <a
-                      href={selectedProject.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center space-x-1.5 text-xs uppercase tracking-wider font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white underline underline-offset-4"
-                    >
-                      <Github size={13} />
-                      <span>Source Repository</span>
-                    </a>
-                  )}
                 </div>
               </div>
             </div>
