@@ -39,14 +39,16 @@
   {
     "id": "project-fire-robot",
     "title": "AI Integrated Autonomous Firefighting Robot",
-    "description": "An autonomous exploration rover engineered for flame sensing, active maze-navigation, and safety hazard mitigation.",
-    "content": "## Hardware-Software Convergence for Emergency Response\n\nThis high-performance autonomous robot was designed and simulated as part of our academic B.Sc. Electrical and Electronics Engineering (EEE) curriculum. Building physical systems that respond to unpredictable thermal hazards requires combining real-time hardware signals with robust, edge-computed AI processing.\n\nThe autonomous rover moves dynamically through enclosed spaces, navigating obstacles, locating target heat points, and deploying fire extinguishing agents with absolute algorithmic precision.\n\n## System Architecture & Control Loops\n\n- **Multisensory Inputs**: Integrated flame sensors, infrared transducers, and ultrasonic distance modules bound to a centralized microcontroller unit.\n- **AI Pathfinding Module**: Programmed custom micro-pathfinding algorithms letting the robot navigate complex mazes, route around debris, and optimize search coverage in high-risk zones.\n- **Electronic Power Regulation**: Designed power distribution circuitry to regulate current draw from high-discharge lithium batteries, ensuring motor controls and active onboard water pumps run without brownout hazards.\n\n## Educational & Practical Realizations\n\nSuccessfully verified pathfinding logic and hardware integration across various physical test corridors. The research highlighted how embedding lightweight intelligent pathfinding agents onto physical silicon nodes significantly reduces response latency compared to centralized cloud-based control.",
+    "description": "An AI-powered autonomous firefighting robot utilizing Raspberry Pi, Arduino Nano, and multi-sensor fusion for real-time hazard detection, powered by quantized YOLOv8 edge models.",
+    "content": "## Autonomous Emergency Response & Capstone Development\n\nDesigned and developed an intelligent autonomous firefighting robot engineered to detect active fire hazards, identify human presence in smoke-filled environments, and execute targeted fire suppression routines. This system bridges the gap between hardware sensors and robust embedded deep learning systems (Edge AI).\n\nBy utilizing a multi-layered hardware control and computing system, the robot navigates unstructured spaces and performs real-time analytics without relying on continuous cloud connectivity.\n\n## Hardware Architecture & Multi-Sensor Fusion\n\n- **Dual-Controller Topography**: Implemented a Raspberry Pi as the centralized primary edge-AI hub paired with an Arduino Nano node for low-level sensor reading and actuator control.\n- **Sensor Fusion Network**: Integrated flame sensors, ultrasonic ranging modules, and infrared thermal arrays into a real-time hazard detection and response pipeline.\n- **Embedded Control Loops**: Programmed autonomous navigation algorithms and motor control matrices to guide the robot around physical barriers.\n\n## Edge AI Optimization & Computer Vision\n\n- **Real-Time Object Detection**: Deployed customized YOLOv8, MobileNet-SSD, and EfficientDet Lite models to achieve parallel detection of fire spots and human survivors in real time.\n- **TensorFlow Lite Engine**: Compiled and converted heavy deep learning models into optimized TensorFlow Lite (.tflite) formats suitable for edge processing.\n- **INT8 Quantization**: Applied post-training INT8 quantization to reduce the computational footprint and memory usage, achieving remarkably low-latency frame rates on constrained embedded hardware.",
     "category": "Academic Projects",
     "tags": [
-      "AI Pathfinding",
-      "Robotics Control",
-      "Microcontrollers",
-      "EEE Engineering"
+      "Raspberry Pi",
+      "Arduino Nano",
+      "YOLOv8",
+      "TensorFlow Lite",
+      "Edge AI",
+      "Multi-Sensor Fusion"
     ],
     "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80",
     "demoUrl": "https://github.com/rafinholic",
